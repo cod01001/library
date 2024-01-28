@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+<h1>{{ project.title }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <img src="{% static books.image %}" alt="" width="100%">
+    </div>
+    <div class="col-md-4">
+        <h5>О книге:</h5>
+        <p>{{ books.description }}</p>
+        <br>
+        <h5>Автор:</h5>
+        <p>{{ books.author }}</p>
+    </div>
+</div>
+{% endblock %}
+
