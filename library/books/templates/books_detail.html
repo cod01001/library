@@ -3,10 +3,12 @@
 {% load static %}
 
 {% block page_content %}
-<h1>{{ project.title }}</h1>
-<div class="row">
-    <div class="col-md-8">
-        <img src="{% static books.image %}" alt="" width="100%">
+
+<h1>{{ books.title }}</h1>
+
+<div class="row ">
+    <div class="col-md-8 text-center" >
+        <img src="{% static books.image %}" alt="" width="48%" >
     </div>
     <div class="col-md-4">
         <h5>О книге:</h5>
