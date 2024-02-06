@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block page_content %}
 
 
 <h1>Книги в библиотеке</h1>
-
 
 <div class="row">
 {% for book in books %}
@@ -30,6 +28,9 @@
     </div>
     {% endfor %}
 </div>
+
+
+
 {% endblock %}
 
 
