@@ -19,26 +19,26 @@ def books_detail(request,pk):
     # .objects.get - достать только определенную запись
     # (pk=pk) персональный ключ по которому будет доставать из бд
     books = Books.objects.get(pk=pk)
-    # form = CommentForm()
-    # if request.method == 'POST':
-    #     form = CommentForm(request.POST)
-    #
-    #     if form.is_valid():
-    #         comment = Comment(
-    #             author=form.cleaned_data['author'],
-    #             body=form.cleaned_data['body'],
-    #             post=post
-    #         )
-    #         comment.save()
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = Comment(
+                author=form.cleaned_data['author'],
+                body=form.cleaned_data['body'],
+                post=books
+            )
+            comment.save()
 
     # comments - переменная отправляеь запрос в бд и достает сообщения относящиеся к выбронаму посту
-    # comments = Comment.objects.filter(post=post)
+    comments = Comment.objects.filter(post=books)
 
     # создание словаря для дальнейшего вывода в HTML
     context = {
         'books': books,
-        # 'comments': comments,
-        # 'form': form,
+        'comments': comments,
+        'form': form,
     }
 
     # указываем какой HTML файл будем вызывать
@@ -58,7 +58,7 @@ def books_category(request,category):
     return render(request,'books_category.html', context)
 
 
-
+# print(1)
 
 
 
