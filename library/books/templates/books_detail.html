@@ -5,25 +5,24 @@
 <h1>{{ books.title }}</h1>
 <div class="row">
     <div class="col-md-8">
-        <img src="{% static books.image %}" alt="" width="60%">
+        <img src="{% static book.image %}" alt="" width="60%">
     </div>
     <div class="col-md-4">
         <h5>О проекте:</h5>
-        <p>{{ books.description }}</p>
+        <p>{{ book.description }}</p>
         <br>
         <h5>Технологии:</h5>
-        <p>{{ books.technology }}</p>
+        <p>{{ book.technology }}</p>
     </div>
 </div>
 
 
-
 <div>
 
-<h3>Оставьте комментарий:</h3>
+    <h3>Оставьте комментарий:</h3>
     !> тут уже начал от себя пробовать
     <form action="/books/{{ book.pk }}/" method="post">
-
+        {% csrf_token %}
         <div class="form-group">
             {{ form.author }}
         </div>
@@ -32,12 +31,19 @@
         </div>
         <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
+
     <h3>Комментарии:</h3>
+    {% for comment in comments %}
+    <p>
+        On {{comment.created_on.date }}&nbsp;
+        <b>{{ comment.author }}</b> wrote:
+    </p>
+    <p>{{ comment.body }}</p>
+    <hr>
+    {% endfor %}
 
 </div>
-
-
-
 {% endblock %}
+
 
 

@@ -18,7 +18,7 @@ def books_detail(request,pk):
     # Books - занвание модели
     # .objects.get - достать только определенную запись
     # (pk=pk) персональный ключ по которому будет доставать из бд
-    books = Books.objects.get(pk=pk)
+    book = Books.objects.get(pk=pk)
     form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -27,16 +27,16 @@ def books_detail(request,pk):
             comment = Comment(
                 author=form.cleaned_data['author'],
                 body=form.cleaned_data['body'],
-                post=books
+                post=book
             )
             comment.save()
 
     # comments - переменная отправляеь запрос в бд и достает сообщения относящиеся к выбронаму посту
-    comments = Comment.objects.filter(post=books)
+    comments = Comment.objects.filter(post=book)
 
     # создание словаря для дальнейшего вывода в HTML
     context = {
-        'books': books,
+        'book': book,
         'comments': comments,
         'form': form,
     }
