@@ -46,19 +46,33 @@ def books_detail(request,pk):
 
 
 
+
+
+
+# создать функцию которая возвращает список книг отсортированных по определенной категории
+# принимаем категорию которую запросил пользователь и
+# сравниваем её с книгами и присвоенными им категориями
+# 'category' какая категория приходит и будет фильтроваться
 def books_category(request,category):
-    category = Category.objects.filter(
+    # category_book - достать из бд только те книги, которые
+    # приписаны искомой категории 'category'
+
+    # filter
+    # Возвращает QuerySet содержащие объекты
+    # соответствующие заданным параметрам
+    category_book = Books.objects.filter(
         categories__name__contains=category
     ).order_by('-created_on')
 
+    # создание словаря для присвоения значений для дальнейшего использования в HTML
     context = {
-        'category': category,
+        'category': category_book,
 
     }
     return render(request,'books_category.html', context)
 
 
-# print(1)
+
 
 
 
