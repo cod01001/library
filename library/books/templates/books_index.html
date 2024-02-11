@@ -3,7 +3,6 @@
 
 {% block page_content %}
 
-
 <h1>Книги в библиотеке</h1>
 
 <div class="row">
@@ -12,26 +11,25 @@
         <div class="card mb-2 d-flex flex-column h-100">
             <img class="card-img-top" src="{% static book.image %}">
             <div class="card-body">
-                <h5 class="card-title">{{ book.title|slice:":25" }}{% if book.description|length > 25 %}...{% endif %}</h5>
-
+                <h5 class="card-title">{{ book.title|slice:":25" }}{% if book.title|length > 25 %}...{% endif %}</h5>
                 <p class="card-text">{{ book.description|slice:":50" }}{% if book.description|length > 50 %}...{% endif %}</p>
-                <h6 class="card-title">Автор: {{ book.author }}</h6>
-                <h6 class="card-title">Категория: {{ book.categories }}</h6>
-
-
-                <a href="{% url 'books_detail' book.pk %}"
-                   class="btn btn-primary mt-2 align-self-start">
-                    Подробнее</a>
-
+                <h6 class="card-title">Автор:
+                    {% for author in book.author.all %}{{ author.name_author }}{% endfor %}</h6>
+                <h6 class="card-title">Категория:
+                    {% for category in book.categories.all %}
+                        <a href="{% url 'books_category' category.name_category %}">{{ category.name_category }}</a>
+                    {% endfor %}
+                </h6>
+                <a href="{% url 'books_detail' book.pk %}" class="btn btn-primary mt-2 align-self-start">Подробнее</a>
             </div>
         </div>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 
 
-
 {% endblock %}
+
 
 
 
